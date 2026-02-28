@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthSpan Concierge Medicine — Precision Medicine &amp; Traditional Healing Arts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest:        '#3E4E44',
+            'forest-deep': '#2C3830',
+            clay:          '#C7BBA4',
+            azure:         '#60B2D5',
+            cream:         '#F6F4EF',
+            'cream-mid':   '#EDE9E1',
+          },
+          fontFamily: {
+            display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans:    ['Inter', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    /* ── DESIGN TOKENS ─────────────────────────────────────────────── */
+    :root {
+      --forest:       #3E4E44;
+      --forest-deep:  #2C3830;
+      --clay:         #C7BBA4;
+      --azure:        #60B2D5;
+      --azure-dk:     #1A6F8E;
+      --azure-lt:     #8FCCE3;
+      --cream:        #F6F4EF;
+      --cream-mid:    #EDE9E1;
+      --cream-card:   #FDFCF9;
+      --font-d:       'Cormorant Garamond', Georgia, serif;
+      --font-s:       'Inter', system-ui, sans-serif;
+      --ease:         cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ── BASE ──────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-s);
+      background: var(--cream);
+      color: var(--forest);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      margin: 0;
+    }
+    h1, h2, h3, h4 { font-family: var(--font-d); margin: 0; }
+    p { margin: 0; }
+    img { display: block; max-width: 100%; }
+    ul { list-style: none; padding: 0; margin: 0; }
+    address { font-style: normal; }
+
+    /* ── GRAIN OVERLAY ─────────────────────────────────────────────── */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 9999; opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* ── SKIP LINK ─────────────────────────────────────────────────── */
+    .skip-link {
+      position: absolute; top: -9999px; left: 1rem;
+      background: var(--azure-dk); color: #fff;
+      padding: 0.5rem 1rem; font-size: 0.875rem;
+      border-radius: 0 0 2px 2px; text-decoration: none; z-index: 9999;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ── LAYOUT ────────────────────────────────────────────────────── */
+    .wrap      { max-width: 80rem;  margin: 0 auto; padding-inline: 4rem; }
+    .wrap--wide { max-width: 88rem; margin: 0 auto; padding-inline: 4rem; }
+    .wrap--narrow { max-width: 60rem; margin: 0 auto; padding-inline: 4rem; }
+
+    .section {
+      position: relative; overflow: hidden;
+      padding-block: 6rem;
+    }
+    .section--sm  { padding-block: 5.5rem; }
+    .section--lg  { padding-block: 7rem; }
+    .section--hero { padding-top: 5rem; padding-bottom: 12rem; }
+
+    .bg-cream     { background: var(--cream); }
+    .bg-mid       { background: var(--cream-mid); }
+    .bg-forest    { background: var(--forest); }
+    .bg-deep      { background: var(--forest-deep); }
+
+    /* ── SECTION HEADER ────────────────────────────────────────────── */
+    .sh { text-align: center; margin-bottom: 4rem; }
+    .sh--left { text-align: left; }
+
+    .label {
+      display: block;
+      font-family: var(--font-s);
+      font-size: 0.6875rem; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--azure-dk);
+      margin-bottom: 1rem;
+    }
+    .label--lt { color: var(--azure-lt); }
+
+    .heading {
+      font-family: var(--font-d);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 400; line-height: 1.12;
+      letter-spacing: -0.02em; color: var(--forest-deep);
+      margin-bottom: 1.125rem;
+    }
+    .heading--lt  { color: #F6F4EF; }
+    .heading--lg  { font-size: clamp(2.25rem, 3.5vw, 3.25rem); letter-spacing: -0.03em; line-height: 1.08; }
+    .heading--h1  { font-size: clamp(2.5rem, 4.8vw, 4.25rem); letter-spacing: -0.03em; line-height: 1.06; margin-bottom: 1.625rem; }
+
+    .subtext {
+      font-size: 1.0625rem;
+      color: rgba(62,78,68,.78);
+      line-height: 1.75;
+      max-width: 42rem;
+      margin-inline: auto;
+    }
+    .subtext--lt { color: rgba(246,244,239,.78); }
+
+    /* ── GRIDS ─────────────────────────────────────────────────────── */
+    .g2    { display: grid; grid-template-columns: 1fr 1fr;           gap: 1.75rem; }
+    .g3    { display: grid; grid-template-columns: repeat(3,1fr);     gap: 0.875rem; }
+    .g4    { display: grid; grid-template-columns: repeat(4,1fr);     gap: 2.5rem; }
+    .g3-lg { display: grid; grid-template-columns: repeat(3,1fr);     gap: 3rem; }
+    .g-hero { display: grid; grid-template-columns: 1fr 1fr;          gap: 4rem; align-items: center; }
+    .g-phil { display: grid; grid-template-columns: 1fr 1.6fr;        gap: 5rem; align-items: center; }
+    .g-cta  { display: grid; grid-template-columns: 1fr 1fr;          gap: 6rem; align-items: start; }
+    .g-foot { display: grid; grid-template-columns: 1.6fr 1fr 1fr;   gap: 4rem; }
+    .g2-inner { display: grid; grid-template-columns: 1fr 1fr;        gap: 0.75rem 1.5rem; }
+
+    /* ── CARDS ─────────────────────────────────────────────────────── */
+    .card {
+      background: var(--cream-card);
+      border-radius: 3px;
+      box-shadow: 0 0 0 1px rgba(199,187,164,.25), 0 1px 3px rgba(62,78,68,.06), 0 4px 14px rgba(62,78,68,.05);
+      padding: 2.75rem 3rem;
+    }
+    .card--muted {
+      background: rgba(62,78,68,.035);
+      border: 1px solid rgba(199,187,164,.38);
+      border-radius: 3px;
+      padding: 2.75rem 3rem;
+    }
+    .card-h {
+      font-family: var(--font-d);
+      font-size: 1.5rem; font-weight: 500;
+      color: var(--forest); letter-spacing: -0.01em;
+      margin-bottom: 1.75rem;
+    }
+
+    /* ── BENEFIT ITEMS ─────────────────────────────────────────────── */
+    .benefit {
+      background: var(--cream-card);
+      border: 1px solid rgba(199,187,164,.28);
+      border-radius: 3px;
+      padding: 1.375rem 1.5rem;
+      transition: box-shadow .18s var(--ease), transform .18s var(--ease);
+    }
+    .benefit:hover {
+      box-shadow: 0 2px 8px rgba(62,78,68,.1), 0 0 0 1px rgba(96,178,213,.2);
+      transform: translateY(-1px);
+    }
+
+    /* ── PILLARS ───────────────────────────────────────────────────── */
+    .pillar { border-top: 1px solid rgba(199,187,164,.2); padding-top: 1.75rem; }
+    .pillar-n {
+      font-family: var(--font-d);
+      font-size: 2.75rem; font-weight: 300; line-height: 1;
+      color: rgba(96,178,213,.22);
+    }
+    .pillar-h {
+      font-family: var(--font-d);
+      font-size: 1.3125rem; font-weight: 500;
+      color: #F6F4EF; letter-spacing: -0.01em;
+      margin: 0.875rem 0 0.625rem;
+    }
+
+    /* ── BUTTONS ───────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--font-s);
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; border-radius: 2px;
+      padding: 0.8125rem 1.875rem;
+      cursor: pointer; border: none;
+      transition: background-color .18s var(--ease),
+                  border-color     .18s var(--ease),
+                  color            .18s var(--ease),
+                  transform        .18s var(--ease),
+                  box-shadow       .18s var(--ease);
+    }
+    .btn:focus-visible { outline: 2px solid var(--azure); outline-offset: 3px; }
+    .btn:active { transform: translateY(0) !important; }
+
+    .btn-primary {
+      background: var(--forest); color: var(--cream);
+      box-shadow: 0 1px 3px rgba(44,56,48,.25), 0 4px 12px rgba(44,56,48,.12);
+    }
+    .btn-primary:hover { background: var(--forest-deep); transform: translateY(-1px); box-shadow: 0 2px 6px rgba(44,56,48,.3), 0 8px 20px rgba(44,56,48,.15); }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1.5px solid rgba(62,78,68,.4);
+      color: var(--forest);
+    }
+    .btn-ghost:hover { background: var(--forest); color: var(--cream); border-color: var(--forest); transform: translateY(-1px); }
+
+    .btn--full { width: 100%; }
+
+    /* ── NAV ───────────────────────────────────────────────────────── */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(246,244,239,.94);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(199,187,164,.35);
+    }
+    .nav__inner {
+      max-width: 88rem; margin: 0 auto;
+      padding: 1rem 4rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+    }
+    .nav__logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+    .nav__logo img { height: 46px; width: auto; }
+
+    .nav__links { display: flex; align-items: center; gap: 2.25rem; }
+    .nav__link {
+      font-family: var(--font-s);
+      font-size: 0.8125rem; font-weight: 400;
+      color: rgba(62,78,68,.72);
+      text-decoration: none; letter-spacing: 0.01em;
+      padding-bottom: 2px;
+      border-bottom: 1.5px solid transparent;
+      transition: color .15s, border-color .15s;
+    }
+    .nav__link:hover  { color: var(--forest); }
+    .nav__link.active { color: var(--forest); border-bottom-color: var(--azure-dk); }
+    .nav__link:focus-visible { outline: 2px solid var(--azure); outline-offset: 3px; border-radius: 2px; }
+
+    /* Hamburger (hidden on desktop) */
+    .nav__toggle {
+      display: none;
+      flex-direction: column; align-items: center; justify-content: center;
+      width: 40px; height: 40px;
+      background: none; border: none; cursor: pointer; gap: 5px; padding: 0;
+      border-radius: 2px;
+    }
+    .nav__toggle:focus-visible { outline: 2px solid var(--azure); outline-offset: 3px; }
+    .nav__bar {
+      display: block; width: 22px; height: 1.5px;
+      background: var(--forest);
+      transition: transform .22s var(--ease), opacity .22s var(--ease);
+    }
+    .nav__toggle[aria-expanded="true"] .nav__bar:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav__toggle[aria-expanded="true"] .nav__bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav__toggle[aria-expanded="true"] .nav__bar:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Mobile drawer */
+    .nav__drawer {
+      max-height: 0; overflow: hidden;
+      border-top: 1px solid transparent;
+      transition: max-height .3s var(--ease), border-color .3s;
+    }
+    .nav__drawer.open {
+      max-height: 400px;
+      border-top-color: rgba(199,187,164,.25);
+    }
+    .nav__drawer-inner {
+      padding: 1.25rem 1.5rem 1.5rem;
+      display: flex; flex-direction: column;
+    }
+    .nav__drawer-link {
+      font-family: var(--font-s);
+      font-size: 0.9375rem; font-weight: 400;
+      color: rgba(62,78,68,.85);
+      text-decoration: none;
+      padding: 0.875rem 0;
+      border-bottom: 1px solid rgba(199,187,164,.2);
+      transition: color .15s;
+    }
+    .nav__drawer-link:last-of-type { border-bottom: none; }
+    .nav__drawer-link:hover { color: var(--forest); }
+    .nav__drawer-link:focus-visible { outline: 2px solid var(--azure); outline-offset: 3px; }
+    .nav__drawer-cta { margin-top: 1rem; }
+
+    /* ── FORM ──────────────────────────────────────────────────────── */
+    .form-label {
+      display: block;
+      font-family: var(--font-s);
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: rgba(62,78,68,.65); margin-bottom: 0.5rem;
+    }
+    .form-input {
+      width: 100%; background: var(--cream-card);
+      border: 1px solid rgba(199,187,164,.5);
+      border-radius: 2px; padding: 0.75rem 1rem;
+      font-family: var(--font-s);
+      font-size: 0.9375rem; color: var(--forest);
+      transition: border-color .15s, box-shadow .15s;
+      outline: none; -webkit-appearance: none; appearance: none;
+    }
+    .form-input::placeholder { color: rgba(62,78,68,.35); }
+    .form-input:focus { border-color: rgba(96,178,213,.6); box-shadow: 0 0 0 3px rgba(96,178,213,.12); }
+    .form-input.error { border-color: rgba(180,60,60,.5); box-shadow: 0 0 0 3px rgba(180,60,60,.08); }
+    textarea.form-input { resize: vertical; min-height: 96px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem; }
+    .form-group { margin-bottom: 1.25rem; }
+
+    /* Form success */
+    .form-success {
+      display: none; text-align: center; padding: 3rem 2rem;
+    }
+    .form-success.visible { display: block; }
+    .form-success__icon {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: rgba(26,111,142,.1);
+      display: inline-flex; align-items: center; justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── FOOTER LINKS ──────────────────────────────────────────────── */
+    .flink {
+      font-size: 0.875rem; color: rgba(246,244,239,.55);
+      text-decoration: none; transition: color .15s;
+    }
+    .flink:hover { color: rgba(246,244,239,.88); }
+    .flink:focus-visible { outline: 2px solid rgba(96,178,213,.7); outline-offset: 3px; border-radius: 2px; }
+    .flink--sm { font-size: 0.75rem; color: rgba(246,244,239,.3); }
+    .flink--sm:hover { color: rgba(246,244,239,.6); }
+
+    /* ── UTILS ─────────────────────────────────────────────────────── */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border-width: 0;
+    }
+    .blob {
+      position: absolute; pointer-events: none;
+    }
+
+    /* ── RESPONSIVE: TABLET (≤1024px) ─────────────────────────────── */
+    @media (max-width: 1024px) {
+      .wrap, .wrap--wide, .wrap--narrow { padding-inline: 2.5rem; }
+      .nav__inner { padding-inline: 2.5rem; }
+      .g4   { grid-template-columns: repeat(2,1fr); }
+      .g-phil { grid-template-columns: 1fr; gap: 3rem; }
+      .g-phil > :first-child { display: flex; justify-content: center; }
+    }
+
+    /* ── RESPONSIVE: MOBILE (≤768px) ──────────────────────────────── */
+    @media (max-width: 768px) {
+      .wrap, .wrap--wide, .wrap--narrow { padding-inline: 1.25rem; }
+      .nav__inner { padding: 0.875rem 1.25rem; }
+
+      .section      { padding-block: 3.5rem; }
+      .section--lg  { padding-block: 4rem; }
+      .section--hero { padding-top: 3rem; padding-bottom: 7rem; }
+
+      /* Show hamburger, hide desktop nav + CTA */
+      .nav__toggle   { display: flex; }
+      .nav__links    { display: none; }
+      .nav__cta-desk { display: none; }
+
+      /* Stack all grids */
+      .g2, .g3, .g4, .g3-lg, .g-hero, .g-phil, .g-cta, .g-foot { grid-template-columns: 1fr; }
+
+      .g-hero { gap: 2rem; }
+      .g-cta  { gap: 3rem; }
+      .g-foot { gap: 2rem; }
+
+      /* Hero photo: stays below text (natural DOM order), cap height */
+      .hero-photo { max-height: 280px; }
+
+      /* Section header */
+      .sh { margin-bottom: 2.5rem; }
+
+      /* Cards */
+      .card, .card--muted { padding: 1.75rem 1.5rem; }
+
+      /* Form */
+      .form-row { grid-template-columns: 1fr; }
+
+      /* Inner 2-col list in services → 1 col */
+      .g2-inner { grid-template-columns: 1fr; }
+    }
+
+    /* ── RESPONSIVE: SMALL MOBILE (≤480px) ────────────────────────── */
+    @media (max-width: 480px) {
+      .heading--h1 { font-size: 2.25rem; }
+      .g3 { grid-template-columns: 1fr; }
+      /* Tighter label tracking so long labels don't wrap on small screens */
+      .label { letter-spacing: 0.1em; }
+    }
+
+    /* ── MEDIUM TABLET (640-768px): benefit grid 2-col ─────────────── */
+    @media (min-width: 640px) and (max-width: 768px) {
+      .g3 { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<!-- ── NAV ──────────────────────────────────────────────────────────── -->
+<nav class="nav" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="#" class="nav__logo" aria-label="HealthSpan Concierge Medicine — home">
+      <img src="brand_assets/logo.png" alt="HealthSpan Concierge Medicine" height="46" width="auto">
+    </a>
+
+    <!-- Desktop links -->
+    <ul class="nav__links" role="list">
+      <li><a href="#about"        class="nav__link" data-nav="about">About</a></li>
+      <li><a href="#services"     class="nav__link" data-nav="services">Services</a></li>
+      <li><a href="#who"          class="nav__link" data-nav="who">Who It's For</a></li>
+      <li><a href="#how"          class="nav__link" data-nav="how">How It Works</a></li>
+    </ul>
+
+    <div style="display:flex;align-items:center;gap:1rem;flex-shrink:0;">
+      <a href="#consultation" class="btn btn-primary nav__cta-desk">Request a Consultation</a>
+      <button class="nav__toggle" aria-expanded="false" aria-controls="nav-drawer" aria-label="Toggle menu">
+        <span class="nav__bar"></span>
+        <span class="nav__bar"></span>
+        <span class="nav__bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div class="nav__drawer" id="nav-drawer" role="navigation" aria-label="Mobile navigation">
+    <div class="nav__drawer-inner">
+      <a href="#about"        class="nav__drawer-link">About</a>
+      <a href="#services"     class="nav__drawer-link">Services</a>
+      <a href="#who"          class="nav__drawer-link">Who It's For</a>
+      <a href="#how"          class="nav__drawer-link">How It Works</a>
+      <div class="nav__drawer-cta">
+        <a href="#consultation" class="btn btn-primary btn--full">Request a Consultation</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- ── HERO ────────────────────────────────────────────────────────── -->
+  <section class="section section--hero bg-cream">
+    <div aria-hidden="true" class="blob" style="top:-8%;right:-4%;width:55%;height:65%;background:radial-gradient(ellipse at 65% 35%,rgba(96,178,213,.08) 0%,transparent 68%);"></div>
+    <div aria-hidden="true" class="blob" style="bottom:10%;left:-4%;width:38%;height:45%;background:radial-gradient(ellipse at 30% 65%,rgba(199,187,164,.16) 0%,transparent 65%);"></div>
+
+    <div class="wrap--wide" style="position:relative;z-index:1;">
+      <div class="g-hero">
+        <!-- Copy -->
+        <div>
+          <span class="label">Precision Medicine · Traditional Healing Arts</span>
+          <h1 class="heading heading--h1" style="color:var(--forest-deep);">
+            The Best of Precision Medicine<br>and Traditional Healing Arts.
+          </h1>
+          <p style="font-size:1.0625rem;color:rgba(62,78,68,.8);line-height:1.75;max-width:30rem;margin-bottom:2.25rem;">
+            A private medical partnership for accomplished adults who want to age with strength, clarity, and agency — guided by rigorous diagnostics and grounded wisdom.
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin-bottom:2.25rem;">
+            <a href="#consultation" class="btn btn-primary">Request a Consultation</a>
+            <a href="#about" class="btn btn-ghost">Learn More</a>
+          </div>
+          <p style="font-size:0.6875rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--clay);">
+            Exclusive practice &nbsp;·&nbsp; 40 patients
+          </p>
+        </div>
+
+        <!-- Photo -->
+        <div class="hero-photo" style="border-radius:4px;overflow:hidden;box-shadow:0 4px 24px rgba(62,78,68,.12),0 1px 6px rgba(62,78,68,.08);aspect-ratio:4/5;background:linear-gradient(160deg,#EDE9E1 0%,#D3CCB8 100%);position:relative;">
+          <img
+            src="images/diamond-head-honolulu.jpg"
+            alt="Aerial view of Diamond Head crater with Waikiki and Honolulu in the background"
+            style="width:100%;height:100%;object-fit:cover;"
+            loading="eager"
+            fetchpriority="high"
+          >
+          <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(44,56,48,.25) 0%,transparent 50%);"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wave -->
+    <div aria-hidden="true" style="position:absolute;bottom:0;left:0;right:0;overflow:hidden;line-height:0;">
+      <svg viewBox="0 0 1440 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:220px;display:block;">
+        <path d="M0,130 C220,170 440,70 660,108 C880,146 1060,50 1280,90 C1380,108 1420,98 1440,102 L1440,220 L0,220 Z" fill="rgba(96,178,213,.05)"/>
+        <path d="M0,148 C200,112 380,168 560,140 C740,112 920,158 1100,128 C1280,98 1390,136 1440,144 L1440,220 L0,220 Z" fill="rgba(96,178,213,.09)"/>
+        <path d="M0,163 C260,138 520,182 780,162 C1040,142 1280,174 1440,163 L1440,220 L0,220 Z" fill="rgba(96,178,213,.13)"/>
+        <path d="M0,178 C300,162 620,190 960,174 C1220,160 1390,180 1440,176 L1440,220 L0,220 Z" fill="rgba(96,178,213,.18)"/>
+        <path d="M0,194 C360,182 720,205 1080,192 C1300,184 1420,196 1440,195 L1440,220 L0,220 Z" fill="rgba(96,178,213,.22)"/>
+      </svg>
+    </div>
+  </section>
+
+
+  <!-- ── PHILOSOPHY ───────────────────────────────────────────────────── -->
+  <section id="about" class="section section--sm bg-mid">
+    <div aria-hidden="true" class="blob" style="top:50%;left:50%;transform:translate(-50%,-50%);width:60%;height:80%;background:radial-gradient(ellipse at 50% 50%,rgba(96,178,213,.05) 0%,transparent 65%);"></div>
+
+    <div class="wrap" style="position:relative;z-index:1;">
+      <div class="g-phil">
+        <div style="text-align:center;">
+          <img src="brand_assets/logo.png" alt="The HealthSpan monkeypod tree — symbol of growing outward" style="width:100%;max-width:300px;height:auto;opacity:.92;margin-inline:auto;">
+        </div>
+        <div>
+          <span class="label">Our Symbol</span>
+          <h2 class="heading">Growing outward,<br>not just upward.</h2>
+          <p style="font-size:1rem;color:rgba(62,78,68,.78);line-height:1.8;margin-bottom:1.25rem;">
+            The monkeypod tree is chosen for its profound symbolism of aging magnificently. Unlike most trees that grow primarily upward, the rain tree grows outward — its canopy spreading wider than it is tall.
+          </p>
+          <p style="font-size:1rem;color:rgba(62,78,68,.78);line-height:1.8;margin-bottom:1.5rem;">
+            This illustrates our philosophy: we're not focused on simply adding years to your life, but on expanding the richness, vitality, and possibilities within those years.
+          </p>
+          <blockquote style="font-family:var(--font-d);font-size:1.1875rem;font-style:italic;font-weight:400;color:var(--forest);line-height:1.65;border-left:2px solid rgba(96,178,213,.45);padding-left:1.25rem;margin:0;">
+            This isn't about fighting decline; it's about building the infrastructure for you to remain a vital, contributing presence in your family and community — the person others still look to, learn from, and gather around.
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── WHAT IS HEALTHSPAN ────────────────────────────────────────────── -->
+  <section class="section bg-cream">
+    <div class="wrap">
+      <div class="sh">
+        <span class="label">What We Offer</span>
+        <h2 class="heading">What is Healthspan Concierge Medicine</h2>
+        <p class="subtext">Healthspan concierge is comprehensive, personalized medical care focused on optimizing your vitality and function for decades.</p>
+      </div>
+
+      <div class="g2">
+        <div class="card">
+          <h3 class="card-h">What It Is</h3>
+          <ul style="display:flex;flex-direction:column;gap:1.125rem;">
+            <li style="display:flex;gap:1rem;align-items:flex-start;">
+              <span aria-hidden="true" style="color:var(--azure-dk);font-size:1rem;margin-top:.15rem;flex-shrink:0;">→</span>
+              <span style="font-size:.9375rem;line-height:1.7;color:var(--forest);">Deep-dive evaluations using cutting-edge diagnostics and predictive medicine</span>
+            </li>
+            <li style="display:flex;gap:1rem;align-items:flex-start;">
+              <span aria-hidden="true" style="color:var(--azure-dk);font-size:1rem;margin-top:.15rem;flex-shrink:0;">→</span>
+              <span style="font-size:.9375rem;line-height:1.7;color:var(--forest);">Personalized broad-based, multifaceted plans based on your whole life context</span>
+            </li>
+            <li style="display:flex;gap:1rem;align-items:flex-start;">
+              <span aria-hidden="true" style="color:var(--azure-dk);font-size:1rem;margin-top:.15rem;flex-shrink:0;">→</span>
+              <span style="font-size:.9375rem;line-height:1.7;color:var(--forest);">Ongoing partnership to optimize health across your priority dimensions</span>
+            </li>
+            <li style="display:flex;gap:1rem;align-items:flex-start;">
+              <span aria-hidden="true" style="color:var(--azure-dk);font-size:1rem;margin-top:.15rem;flex-shrink:0;">→</span>
+              <span style="font-size:.9375rem;line-height:1.7;color:var(--forest);">Expert guidance through emerging healthspan research</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card--muted">
+          <h3 class="card-h">What It's Not</h3>
+          <ul style="display:flex;flex-direction:column;gap:1.125rem;">
+            <li style="display:flex;gap:1rem;align-items:flex-start;">
+              <span aria-hidden="true" style="color:var(--clay);font-size:.875rem;margin-top:.2rem;flex-shrink:0;">✕</span>
+              <span style="font-size:.9375rem;line-height:1.7;color:rgba(62,78,68,.62);">24/7 on-call emergency service</span>
+            </li>
+            <li style="display:flex;gap:1rem;align-items:flex-start;">
+              <span aria-hidden="true" style="color:var(--clay);font-size:.875rem;margin-top:.2rem;flex-shrink:0;">✕</span>
+              <span style="font-size:.9375rem;line-height:1.7;color:rgba(62,78,68,.62);">Reactive sick care</span>
+            </li>
+            <li style="display:flex;gap:1rem;align-items:flex-start;">
+              <span aria-hidden="true" style="color:var(--clay);font-size:.875rem;margin-top:.2rem;flex-shrink:0;">✕</span>
+              <span style="font-size:.9375rem;line-height:1.7;color:rgba(62,78,68,.62);">One-size-fits-all protocols</span>
+            </li>
+            <li style="display:flex;gap:1rem;align-items:flex-start;">
+              <span aria-hidden="true" style="color:var(--clay);font-size:.875rem;margin-top:.2rem;flex-shrink:0;">✕</span>
+              <span style="font-size:.9375rem;line-height:1.7;color:rgba(62,78,68,.62);">Traditional insurance-based medicine</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── OUR APPROACH ──────────────────────────────────────────────────── -->
+  <section class="section section--lg bg-forest">
+    <div aria-hidden="true" class="blob" style="top:-10%;right:-5%;width:50%;height:70%;background:radial-gradient(ellipse at 70% 30%,rgba(96,178,213,.07) 0%,transparent 65%);"></div>
+
+    <div class="wrap" style="position:relative;z-index:1;">
+      <div class="sh">
+        <span class="label label--lt">Our Philosophy</span>
+        <h2 class="heading heading--lt">Cutting-Edge + Experienced</h2>
+        <p class="subtext subtext--lt" style="font-family:var(--font-d);font-size:1.25rem;font-style:italic;font-weight:300;line-height:1.6;">
+          Bringing together the best of precision medicine and traditional healing arts.
+        </p>
+      </div>
+
+      <div class="g4">
+        <div class="pillar">
+          <div class="pillar-n" aria-hidden="true">01</div>
+          <h3 class="pillar-h">Comprehensive Evaluation</h3>
+          <p style="font-size:.875rem;color:rgba(246,244,239,.78);line-height:1.7;">We look at everything that matters to being human</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-n" aria-hidden="true">02</div>
+          <h3 class="pillar-h">Evidence Meets Innovation</h3>
+          <p style="font-size:.875rem;color:rgba(246,244,239,.78);line-height:1.7;">How we vet and apply emerging technology</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-n" aria-hidden="true">03</div>
+          <h3 class="pillar-h">Personalized Treatment Plans</h3>
+          <p style="font-size:.875rem;color:rgba(246,244,239,.78);line-height:1.7;">Based on your unique situation, goals, and research</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-n" aria-hidden="true">04</div>
+          <h3 class="pillar-h">Ongoing Partnership</h3>
+          <p style="font-size:.875rem;color:rgba(246,244,239,.78);line-height:1.7;">Responsive, research-driven, collaborative</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── WHO IT'S FOR ──────────────────────────────────────────────────── -->
+  <section id="who" class="section bg-cream">
+    <div class="wrap">
+      <div class="sh">
+        <span class="label">The Right Fit</span>
+        <h2 class="heading">Who This Partnership Is For</h2>
+      </div>
+
+      <div class="g2">
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.75rem;">
+            <div aria-hidden="true" style="width:30px;height:30px;border-radius:50%;background:rgba(26,111,142,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5L5 9.5L11 3.5" stroke="#1A6F8E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="card-h" style="margin:0;">This is for you if…</h3>
+          </div>
+          <ul style="display:flex;flex-direction:column;gap:.875rem;">
+            <li style="font-size:.9375rem;line-height:1.65;color:var(--forest);padding-left:1.25rem;border-left:2px solid rgba(26,111,142,.3);">Individuals 55+ who value data and long-term planning</li>
+            <li style="font-size:.9375rem;line-height:1.65;color:var(--forest);padding-left:1.25rem;border-left:2px solid rgba(26,111,142,.3);">High-agency professionals and retirees</li>
+            <li style="font-size:.9375rem;line-height:1.65;color:var(--forest);padding-left:1.25rem;border-left:2px solid rgba(26,111,142,.3);">Those willing to invest deeply in prevention</li>
+            <li style="font-size:.9375rem;line-height:1.65;color:var(--forest);padding-left:1.25rem;border-left:2px solid rgba(26,111,142,.3);">Those seeking partnership, not episodic care</li>
+          </ul>
+        </div>
+
+        <div class="card--muted">
+          <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.75rem;">
+            <div aria-hidden="true" style="width:30px;height:30px;border-radius:50%;background:rgba(199,187,164,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 2L9 9M9 2L2 9" stroke="#C7BBA4" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <h3 class="card-h" style="margin:0;">This is not for you if…</h3>
+          </div>
+          <ul style="display:flex;flex-direction:column;gap:.875rem;">
+            <li style="font-size:.9375rem;line-height:1.65;color:rgba(62,78,68,.58);padding-left:1.25rem;border-left:2px solid rgba(199,187,164,.38);">You're seeking urgent or emergency care</li>
+            <li style="font-size:.9375rem;line-height:1.65;color:rgba(62,78,68,.58);padding-left:1.25rem;border-left:2px solid rgba(199,187,164,.38);">You want reactive, insurance-based medicine</li>
+            <li style="font-size:.9375rem;line-height:1.65;color:rgba(62,78,68,.58);padding-left:1.25rem;border-left:2px solid rgba(199,187,164,.38);">You're looking for quick fixes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── WHAT YOU GAIN ─────────────────────────────────────────────────── -->
+  <section class="section bg-mid">
+    <div aria-hidden="true" class="blob" style="top:0;right:0;width:45%;height:100%;background:radial-gradient(ellipse at 80% 40%,rgba(96,178,213,.06) 0%,transparent 65%);"></div>
+
+    <div class="wrap" style="position:relative;z-index:1;">
+      <div class="sh">
+        <span class="label">Your Investment</span>
+        <h2 class="heading">What You Gain</h2>
+      </div>
+
+      <div class="g3" style="margin-bottom:3.5rem;">
+        <div class="benefit"><p style="font-size:.9375rem;line-height:1.65;color:var(--forest);">Full picture of your health across all dimensions</p></div>
+        <div class="benefit"><p style="font-size:.9375rem;line-height:1.65;color:var(--forest);">Context-aware care that considers your whole life</p></div>
+        <div class="benefit"><p style="font-size:.9375rem;line-height:1.65;color:var(--forest);">Decades of clinical experience researching with and guiding your care</p></div>
+        <div class="benefit"><p style="font-size:.9375rem;line-height:1.65;color:var(--forest);">Critical evaluation of emerging technologies and research</p></div>
+        <div class="benefit"><p style="font-size:.9375rem;line-height:1.65;color:var(--forest);">Partner in interpreting your own research and questions</p></div>
+        <div class="benefit"><p style="font-size:.9375rem;line-height:1.65;color:var(--forest);">Address issues before they become crises</p></div>
+        <div class="benefit"><p style="font-size:.9375rem;line-height:1.65;color:var(--forest);">Prepare for lifecycle transitions with intention</p></div>
+        <div class="benefit"><p style="font-size:.9375rem;line-height:1.65;color:var(--forest);">Treatment plans designed for your unique situation</p></div>
+        <div class="benefit"><p style="font-size:.9375rem;line-height:1.65;color:var(--forest);">Collaborative approach that respects your agency</p></div>
+      </div>
+
+      <p style="font-family:var(--font-d);font-size:1.625rem;font-style:italic;font-weight:400;color:var(--forest);text-align:center;line-height:1.4;">Your next 30 years deserve more than reactive medicine.</p>
+    </div>
+  </section>
+
+
+  <!-- ── SERVICES & PRICING ─────────────────────────────────────────────── -->
+  <section id="services" class="section bg-cream">
+    <div class="wrap">
+      <div class="sh">
+        <span class="label">Membership</span>
+        <h2 class="heading">Services &amp; Investment</h2>
+        <p style="font-size:.6875rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);">
+          Exclusive to 40 patients &nbsp;·&nbsp; Annual membership
+        </p>
+      </div>
+
+      <!-- Price callout -->
+      <div style="text-align:center;margin-bottom:4rem;">
+        <p style="font-family:var(--font-d);font-size:1.25rem;font-style:italic;font-weight:400;color:rgba(62,78,68,.65);margin-bottom:1.25rem;line-height:1.5;">
+          What $30,000 gives you that no insurance plan ever could
+        </p>
+        <div style="display:inline-block;border:1.5px solid rgba(62,78,68,.18);border-radius:3px;padding:2rem 3.5rem;">
+          <div style="font-family:var(--font-d);font-size:3.75rem;font-weight:300;line-height:1;color:var(--forest);letter-spacing:-0.03em;">$30,000</div>
+          <div style="font-size:.6875rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin-top:.5rem;">per year</div>
+        </div>
+      </div>
+
+      <div class="g2">
+        <!-- Included -->
+        <div class="card">
+          <h3 class="card-h">Included in Your Membership</h3>
+          <ul class="g2-inner">
+            <li style="display:flex;gap:.625rem;align-items:flex-start;"><span aria-hidden="true" style="color:var(--azure-dk);font-size:.4rem;margin-top:.5rem;flex-shrink:0;">◆</span><span style="font-size:.875rem;line-height:1.6;color:var(--forest);">Comprehensive metabolic &amp; hormonal workup</span></li>
+            <li style="display:flex;gap:.625rem;align-items:flex-start;"><span aria-hidden="true" style="color:var(--azure-dk);font-size:.4rem;margin-top:.5rem;flex-shrink:0;">◆</span><span style="font-size:.875rem;line-height:1.6;color:var(--forest);">Blood Cancer Screening</span></li>
+            <li style="display:flex;gap:.625rem;align-items:flex-start;"><span aria-hidden="true" style="color:var(--azure-dk);font-size:.4rem;margin-top:.5rem;flex-shrink:0;">◆</span><span style="font-size:.875rem;line-height:1.6;color:var(--forest);">Cardiac Calcium Score</span></li>
+            <li style="display:flex;gap:.625rem;align-items:flex-start;"><span aria-hidden="true" style="color:var(--azure-dk);font-size:.4rem;margin-top:.5rem;flex-shrink:0;">◆</span><span style="font-size:.875rem;line-height:1.6;color:var(--forest);">Neuroplasticity Assessment</span></li>
+            <li style="display:flex;gap:.625rem;align-items:flex-start;"><span aria-hidden="true" style="color:var(--azure-dk);font-size:.4rem;margin-top:.5rem;flex-shrink:0;">◆</span><span style="font-size:.875rem;line-height:1.6;color:var(--forest);">Bone Density Score</span></li>
+            <li style="display:flex;gap:.625rem;align-items:flex-start;"><span aria-hidden="true" style="color:var(--azure-dk);font-size:.4rem;margin-top:.5rem;flex-shrink:0;">◆</span><span style="font-size:.875rem;line-height:1.6;color:var(--forest);">DNA 360 Testing</span></li>
+            <li style="display:flex;gap:.625rem;align-items:flex-start;"><span aria-hidden="true" style="color:var(--azure-dk);font-size:.4rem;margin-top:.5rem;flex-shrink:0;">◆</span><span style="font-size:.875rem;line-height:1.6;color:var(--forest);">Body Composition Analysis</span></li>
+            <li style="display:flex;gap:.625rem;align-items:flex-start;"><span aria-hidden="true" style="color:var(--azure-dk);font-size:.4rem;margin-top:.5rem;flex-shrink:0;">◆</span><span style="font-size:.875rem;line-height:1.6;color:var(--forest);">Expert Medical Research with AI</span></li>
+            <li style="display:flex;gap:.625rem;align-items:flex-start;"><span aria-hidden="true" style="color:var(--azure-dk);font-size:.4rem;margin-top:.5rem;flex-shrink:0;">◆</span><span style="font-size:.875rem;line-height:1.6;color:var(--forest);">Individualized Health Coaching</span></li>
+            <li style="display:flex;gap:.625rem;align-items:flex-start;"><span aria-hidden="true" style="color:var(--azure-dk);font-size:.4rem;margin-top:.5rem;flex-shrink:0;">◆</span><span style="font-size:.875rem;line-height:1.6;color:var(--forest);">Personalized Health Roadmap</span></li>
+            <li style="display:flex;gap:.625rem;align-items:flex-start;"><span aria-hidden="true" style="color:var(--azure-dk);font-size:.4rem;margin-top:.5rem;flex-shrink:0;">◆</span><span style="font-size:.875rem;line-height:1.6;color:var(--forest);">Body, mind, spirit whole person support</span></li>
+            <li style="display:flex;gap:.625rem;align-items:flex-start;"><span aria-hidden="true" style="color:var(--azure-dk);font-size:.4rem;margin-top:.5rem;flex-shrink:0;">◆</span><span style="font-size:.875rem;line-height:1.6;color:var(--forest);">6 Acupuncture visits</span></li>
+            <li style="display:flex;gap:.625rem;align-items:flex-start;"><span aria-hidden="true" style="color:var(--azure-dk);font-size:.4rem;margin-top:.5rem;flex-shrink:0;">◆</span><span style="font-size:.875rem;line-height:1.6;color:var(--forest);">Body Mechanics: yoga &amp; resistance training</span></li>
+            <li style="display:flex;gap:.625rem;align-items:flex-start;"><span aria-hidden="true" style="color:var(--azure-dk);font-size:.4rem;margin-top:.5rem;flex-shrink:0;">◆</span><span style="font-size:.875rem;line-height:1.6;color:var(--forest);">Nutritional consultation</span></li>
+            <li style="display:flex;gap:.625rem;align-items:flex-start;grid-column:1/-1;"><span aria-hidden="true" style="color:var(--azure-dk);font-size:.4rem;margin-top:.5rem;flex-shrink:0;">◆</span><span style="font-size:.875rem;line-height:1.6;color:var(--forest);">Family &amp; community relationship support</span></li>
+          </ul>
+        </div>
+
+        <!-- Cost Plus -->
+        <div class="card--muted">
+          <h3 class="card-h">Cost Plus Services</h3>
+          <p style="font-size:.8125rem;color:rgba(62,78,68,.45);margin-bottom:1.75rem;margin-top:-1rem;">Available at cost, as needed</p>
+          <ul style="display:flex;flex-direction:column;gap:.875rem;">
+            <li style="display:flex;gap:.75rem;align-items:flex-start;"><span aria-hidden="true" style="color:var(--clay);font-size:.5rem;margin-top:.45rem;flex-shrink:0;">◇</span><span style="font-size:.9rem;line-height:1.65;color:rgba(62,78,68,.7);">Individual Physical Therapy</span></li>
+            <li style="display:flex;gap:.75rem;align-items:flex-start;"><span aria-hidden="true" style="color:var(--clay);font-size:.5rem;margin-top:.45rem;flex-shrink:0;">◇</span><span style="font-size:.9rem;line-height:1.65;color:rgba(62,78,68,.7);">Psychosocial Care</span></li>
+            <li style="display:flex;gap:.75rem;align-items:flex-start;"><span aria-hidden="true" style="color:var(--clay);font-size:.5rem;margin-top:.45rem;flex-shrink:0;">◇</span><span style="font-size:.9rem;line-height:1.65;color:rgba(62,78,68,.7);">Sleep Study</span></li>
+            <li style="display:flex;gap:.75rem;align-items:flex-start;"><span aria-hidden="true" style="color:var(--clay);font-size:.5rem;margin-top:.45rem;flex-shrink:0;">◇</span><span style="font-size:.9rem;line-height:1.65;color:rgba(62,78,68,.7);">Genetic Testing</span></li>
+            <li style="display:flex;gap:.75rem;align-items:flex-start;"><span aria-hidden="true" style="color:var(--clay);font-size:.5rem;margin-top:.45rem;flex-shrink:0;">◇</span><span style="font-size:.9rem;line-height:1.65;color:rgba(62,78,68,.7);">Comprehensive Gut Microbiome Analysis</span></li>
+            <li style="display:flex;gap:.75rem;align-items:flex-start;"><span aria-hidden="true" style="color:var(--clay);font-size:.5rem;margin-top:.45rem;flex-shrink:0;">◇</span><span style="font-size:.9rem;line-height:1.65;color:rgba(62,78,68,.7);">Toxic &amp; Heavy Metal Testing</span></li>
+            <li style="display:flex;gap:.75rem;align-items:flex-start;"><span aria-hidden="true" style="color:var(--clay);font-size:.5rem;margin-top:.45rem;flex-shrink:0;">◇</span><span style="font-size:.9rem;line-height:1.65;color:rgba(62,78,68,.7);">Hormone Testing</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── WHAT HAPPENS NEXT ─────────────────────────────────────────────── -->
+  <section id="how" class="section section--lg bg-forest">
+    <div aria-hidden="true" style="position:absolute;top:0;left:0;right:0;line-height:0;overflow:hidden;transform:rotate(180deg);">
+      <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:80px;display:block;">
+        <path d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,30 1440,40 L1440,80 L0,80 Z" fill="#F6F4EF"/>
+      </svg>
+    </div>
+    <div aria-hidden="true" style="position:absolute;bottom:0;left:0;right:0;line-height:0;overflow:hidden;">
+      <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:80px;display:block;">
+        <path d="M0,40 C360,0 720,80 1080,40 C1260,20 1380,60 1440,40 L1440,80 L0,80 Z" fill="#F6F4EF"/>
+      </svg>
+    </div>
+
+    <div class="wrap--narrow" style="position:relative;z-index:1;">
+      <div class="sh">
+        <span class="label label--lt">Getting Started</span>
+        <h2 class="heading heading--lt">What Happens Next</h2>
+      </div>
+
+      <div class="g3-lg">
+        <div style="text-align:center;">
+          <div aria-hidden="true" style="font-family:var(--font-d);font-size:4rem;font-weight:300;color:rgba(96,178,213,.22);line-height:1;margin-bottom:1.25rem;">1</div>
+          <h3 style="font-family:var(--font-d);font-size:1.3125rem;font-weight:500;color:#F6F4EF;margin-bottom:.75rem;">Initial Consult</h3>
+          <p style="font-size:.875rem;color:rgba(246,244,239,.78);line-height:1.75;">Discuss your health goals and concerns to explore if we're the right fit for each other</p>
+        </div>
+        <div style="text-align:center;">
+          <div aria-hidden="true" style="font-family:var(--font-d);font-size:4rem;font-weight:300;color:rgba(96,178,213,.22);line-height:1;margin-bottom:1.25rem;">2</div>
+          <h3 style="font-family:var(--font-d);font-size:1.3125rem;font-weight:500;color:#F6F4EF;margin-bottom:.75rem;">Comprehensive Evaluation</h3>
+          <p style="font-size:.875rem;color:rgba(246,244,239,.78);line-height:1.75;">Life context and whole person review, advanced diagnostics, and functional testing</p>
+        </div>
+        <div style="text-align:center;">
+          <div aria-hidden="true" style="font-family:var(--font-d);font-size:4rem;font-weight:300;color:rgba(96,178,213,.22);line-height:1;margin-bottom:1.25rem;">3</div>
+          <h3 style="font-family:var(--font-d);font-size:1.3125rem;font-weight:500;color:#F6F4EF;margin-bottom:.75rem;">Your Healthspan Roadmap</h3>
+          <p style="font-size:.875rem;color:rgba(246,244,239,.78);line-height:1.75;">Receive your personalized healthspan roadmap and begin the partnership</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── CONSULTATION FORM ─────────────────────────────────────────────── -->
+  <section id="consultation" class="section section--lg bg-cream">
+    <div aria-hidden="true" class="blob" style="top:50%;left:50%;transform:translate(-50%,-50%);width:80%;height:80%;background:radial-gradient(ellipse at 50% 50%,rgba(96,178,213,.06) 0%,transparent 65%);"></div>
+
+    <div class="wrap" style="position:relative;z-index:1;">
+      <div class="g-cta">
+        <!-- Copy -->
+        <div style="padding-top:.5rem;">
+          <span class="label">Begin Your Partnership</span>
+          <h2 class="heading heading--lg">Your next 30 years deserve more than reactive medicine.</h2>
+          <p style="font-size:1rem;color:rgba(62,78,68,.7);line-height:1.75;margin-bottom:2rem;margin-top:1.5rem;">
+            We accept a limited number of new patients each year. Tell us a bit about yourself and we'll be in touch to schedule a conversation.
+          </p>
+          <p style="font-size:.6875rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--clay);">
+            Exclusive practice &nbsp;·&nbsp; 40 patients maximum
+          </p>
+        </div>
+
+        <!-- Form card -->
+        <div class="card" style="padding:2.5rem 2.75rem;">
+          <form id="consult-form" novalidate>
+            <div class="form-row">
+              <div>
+                <label for="f-name" class="form-label">Full Name <span aria-hidden="true" style="color:var(--azure-dk);">*</span></label>
+                <input id="f-name" type="text" name="name" class="form-input" placeholder="Your name" required autocomplete="name">
+              </div>
+              <div>
+                <label for="f-age" class="form-label">Age Range <span aria-hidden="true" style="color:var(--azure-dk);">*</span></label>
+                <select id="f-age" name="age" class="form-input" required>
+                  <option value="" disabled selected>Select…</option>
+                  <option>45–54</option>
+                  <option>55–64</option>
+                  <option>65–74</option>
+                  <option>75+</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div>
+                <label for="f-email" class="form-label">Email <span aria-hidden="true" style="color:var(--azure-dk);">*</span></label>
+                <input id="f-email" type="email" name="email" class="form-input" placeholder="you@example.com" required autocomplete="email">
+              </div>
+              <div>
+                <label for="f-phone" class="form-label">Phone</label>
+                <input id="f-phone" type="tel" name="phone" class="form-input" placeholder="(808) 000-0000" autocomplete="tel">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="f-goals" class="form-label">Primary Health Goals</label>
+              <textarea id="f-goals" name="goals" class="form-input" placeholder="What matters most to you right now?" rows="4"></textarea>
+            </div>
+
+            <div class="form-group" style="margin-bottom:2rem;">
+              <label for="f-source" class="form-label">How did you hear about us?</label>
+              <select id="f-source" name="source" class="form-input">
+                <option value="" disabled selected>Select…</option>
+                <option>Physician referral</option>
+                <option>Patient referral</option>
+                <option>Web search</option>
+                <option>Social media</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn--full">Submit Request</button>
+            <p style="font-size:.75rem;color:rgba(62,78,68,.45);text-align:center;margin-top:1rem;line-height:1.5;">
+              We'll respond within 2 business days. We do not share your information.
+            </p>
+          </form>
+
+          <!-- Success state -->
+          <div class="form-success" id="form-success" role="status" aria-live="polite">
+            <div class="form-success__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 12L9 17L20 6" stroke="#1A6F8E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 style="font-family:var(--font-d);font-size:1.875rem;font-weight:400;color:var(--forest-deep);margin-bottom:.75rem;">Request Received</h3>
+            <p style="font-size:.9375rem;color:rgba(62,78,68,.7);line-height:1.7;max-width:22rem;margin-inline:auto;">
+              Thank you for reaching out. We'll be in touch within 2 business days to schedule a conversation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<!-- ── FOOTER ────────────────────────────────────────────────────────────── -->
+<footer style="background:var(--forest-deep);color:rgba(246,244,239,.65);">
+
+  <div class="wrap" style="padding-top:4rem;padding-bottom:3rem;">
+    <div class="g-foot">
+      <!-- Brand -->
+      <div>
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:1.25rem;">
+          <span style="font-family:var(--font-d);font-size:1.25rem;font-weight:500;color:rgba(246,244,239,.75);letter-spacing:.01em;">HealthSpan</span>
+          <span aria-hidden="true" style="font-size:.4rem;color:rgba(246,244,239,.2);">◆</span>
+          <span style="font-family:var(--font-s);font-size:.6875rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:rgba(246,244,239,.35);">Concierge Medicine</span>
+        </div>
+        <p style="font-size:.875rem;line-height:1.7;color:rgba(246,244,239,.5);max-width:22rem;">
+          A private medical partnership for accomplished adults who want to age with strength, clarity, and agency.
+        </p>
+      </div>
+
+      <!-- Quick links -->
+      <div>
+        <h2 style="font-family:var(--font-s);font-size:.6875rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(246,244,239,.35);margin-bottom:1.25rem;">Quick Links</h2>
+        <nav aria-label="Footer navigation">
+          <ul style="display:flex;flex-direction:column;gap:.625rem;">
+            <li><a href="#about"        class="flink">About</a></li>
+            <li><a href="#services"     class="flink">Services</a></li>
+            <li><a href="#who"          class="flink">Who It's For</a></li>
+            <li><a href="#how"          class="flink">How It Works</a></li>
+            <li><a href="#consultation" class="flink">Get Started</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h2 style="font-family:var(--font-s);font-size:.6875rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(246,244,239,.35);margin-bottom:1.25rem;">Contact</h2>
+        <address>
+          <ul style="display:flex;flex-direction:column;gap:.75rem;">
+            <li><a href="mailto:hello@healthspanconcierge.com" class="flink">hello@healthspanconcierge.com</a></li>
+            <li><a href="tel:+18085355555" class="flink">(808) 535-5555</a></li>
+            <li style="font-size:.875rem;color:rgba(246,244,239,.55);">Honolulu, Hawai'i</li>
+          </ul>
+        </address>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap"><hr style="border:none;border-top:1px solid rgba(199,187,164,.12);"></div>
+
+  <div class="wrap" style="padding-top:1.5rem;padding-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+    <p style="font-size:.75rem;color:rgba(246,244,239,.3);letter-spacing:.04em;">&copy; 2026 HealthSpan Concierge Medicine. All rights reserved.</p>
+    <nav aria-label="Legal links">
+      <ul style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;">
+        <li><a href="#" class="flink flink--sm">Privacy Policy</a></li>
+        <li><a href="#" class="flink flink--sm">Terms of Use</a></li>
+        <li><a href="#" class="flink flink--sm">Medical Disclaimer</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="wrap" style="padding-bottom:2.5rem;">
+    <p style="font-size:.6875rem;color:rgba(246,244,239,.22);line-height:1.65;max-width:70rem;">
+      <strong style="font-weight:500;">Medical Disclaimer:</strong> The information on this website is for informational purposes only and does not constitute medical advice, diagnosis, or treatment. HealthSpan Concierge Medicine is a direct primary care practice and does not accept insurance. Services described are not a substitute for emergency medical care. If you are experiencing a medical emergency, please call 911 or go to your nearest emergency room.
+    </p>
+  </div>
+
+</footer>
+
+
+<!-- ── JAVASCRIPT ─────────────────────────────────────────────────────────── -->
+<script>
+(function () {
+  'use strict';
+
+  // ── Hamburger nav ───────────────────────────────────────────────────────
+  const toggle = document.querySelector('.nav__toggle');
+  const drawer = document.getElementById('nav-drawer');
+
+  function openNav()  { toggle.setAttribute('aria-expanded', 'true');  drawer.classList.add('open'); }
+  function closeNav() { toggle.setAttribute('aria-expanded', 'false'); drawer.classList.remove('open'); }
+
+  toggle.addEventListener('click', () => {
+    toggle.getAttribute('aria-expanded') === 'true' ? closeNav() : openNav();
+  });
+
+  // Close on link click
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+
+  // Close on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && drawer.classList.contains('open')) {
+      closeNav();
+      toggle.focus();
+    }
+  });
+
+
+  // ── Scroll-aware nav active states ─────────────────────────────────────
+  const navLinks = document.querySelectorAll('.nav__link[data-nav]');
+  const sections = document.querySelectorAll('main section[id]');
+
+  if ('IntersectionObserver' in window && sections.length) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach(link => link.classList.toggle('active', link.dataset.nav === id));
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+
+    sections.forEach(s => observer.observe(s));
+  }
+
+
+  // ── Form submission ─────────────────────────────────────────────────────
+  const form    = document.getElementById('consult-form');
+  const success = document.getElementById('form-success');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    // Validate required fields
+    let valid = true;
+    form.querySelectorAll('[required]').forEach(field => {
+      const empty = !field.value.trim();
+      const emailInvalid = field.type === 'email' && field.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim());
+      if (empty || emailInvalid) {
+        field.classList.add('error');
+        if (!valid) return;       // only focus first invalid
+        field.focus();
+        valid = false;
+      } else {
+        field.classList.remove('error');
+      }
+    });
+
+    if (!valid) return;
+
+    // Show success
+    form.style.display = 'none';
+    success.classList.add('visible');
+    success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+  // Clear error state on input
+  form.querySelectorAll('[required]').forEach(field => {
+    field.addEventListener('input', () => field.classList.remove('error'));
+  });
+
+}());
+</script>
+
+</body>
+</html>
