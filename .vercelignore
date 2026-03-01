@@ -1,0 +1,6 @@
+node_modules/
+temporary screenshots/
+screenshot.mjs
+serve.mjs
+CLAUDE.md
+FIGMA_DESIGN_SYSTEM.md
